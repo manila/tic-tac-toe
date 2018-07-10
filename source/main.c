@@ -6,7 +6,7 @@ int	main(void)
 
 	start_game(game);
 
-	//end_game(game);
+	end_game(game);
 
 	return (0);
 }

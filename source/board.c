@@ -5,15 +5,20 @@
 
 void place_piece_on_board(int position_number, BITBOARD *bitboard)
 {
-	(*bitboard |= (((unsigned int) 1) << (position_number - 1)));
+	unsigned int bitmask = 1;
+	
+	bitmask <<= (position_number - 1);
+
+	*bitboard |= bitmask;
 }
 
 char	*get_pieces_from_board(char *board_pieces, char *player_pieces, BITBOARD *bitboards)
 {
-	int bitmask = 1;
+
+	unsigned int bitmask = 1;
 	int position_number = 0;
 
-	while (bitmask & (position_number < 9))
+	while (position_number < 9)
 	{
 		if (bitboards[0] & bitmask)
 		{
@@ -25,8 +30,9 @@ char	*get_pieces_from_board(char *board_pieces, char *player_pieces, BITBOARD *b
 		}
 		
 		position_number++;
-		bitmask = bitmask << 1;
+		bitmask <<= 1;
 	}
+
 
 	return (board_pieces);
 }
