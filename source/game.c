@@ -41,14 +41,22 @@ void	game_loop(Game *game)
 		printf("\nPlayer %d: Enter Position Number: ", game->current_player + 1);
 		scanf("%d", &position_number);
 
-		place_piece_on_board(position_number, &(game->bitboards[game->current_player]));
 
-		if (0)
+		if (valid_piece_placement(position_number, game->bitboards))
+		{
+			place_piece_on_board(position_number, &(game->bitboards[game->current_player]));
+			game->current_player ^= 1;
+		}
+		else
+		{
+			printf("\n Invalid Move: Try Again \n");
+		}
+
+		if (board_is_full(game->bitboards))
 		{
 			game->game_over = 1;
 		}
 
-		game->current_player ^= 1;
 	}
 }
 

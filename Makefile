@@ -2,7 +2,7 @@ TARGET = tic-tac-toe
 INCLUDE = ./include/
 SOURCE = ./source/*
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c99
+CFLAGS = -Werror -Wall -Wextra -std=c99
 
 .PHONY: all clean fclean re
 

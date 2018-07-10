@@ -14,4 +14,8 @@ void	pretty_print_board(char *board_pieces);
 void	place_piece_on_board(int position_number, BITBOARD *bitboard);
 
 char 	*get_pieces_from_board(char *board_pieces, char *player_pieces, BITBOARD *bitboards);
+
+int	valid_piece_placement(int positions_number, BITBOARD *bitboard);
+
+unsigned int	board_is_full(BITBOARD *bitboards);
 #endif

@@ -3,7 +3,7 @@
 #include "board.h"
 #include "game.h"
 
-void place_piece_on_board(int position_number, BITBOARD *bitboard)
+void	place_piece_on_board(int position_number, BITBOARD *bitboard)
 {
 	unsigned int bitmask = 1;
 	
@@ -46,7 +46,27 @@ void	pretty_print_board(char *player_pieces)
 	printf("\n  %c | %c | %c\n", player_pieces[6], player_pieces[7], player_pieces[8]);
 }
 
-int	valid_piece_placement(int position_number, BITBOARD bitboard)
+int	valid_piece_placement(int position_number, BITBOARD *bitboard)
 {
-	return (0);
+	int bitmask = 1;
+
+	if ((position_number > 0) && (position_number < 10))
+	{
+		bitmask <<= (position_number - 1);
+
+		return !(bitmask & (bitboard[0] | bitboard[1]));
+	}
+	else
+	{
+		return (0);
+	}
+}
+
+unsigned int	board_is_full(BITBOARD *bitboards)
+{
+	BITBOARD combined_board;
+	
+	combined_board = (bitboards[0] & bitboards[1]);
+
+	return !(combined_board ^ (BITBOARD) 0x01FF);
 }
