@@ -34,6 +34,7 @@ void	game_loop(Game *game)
 	int moves = 0;
 	int position_number;	
 
+
 	while (!game->game_over)
 	{
 		get_pieces_from_board(game->board_pieces, game->player_pieces, game->bitboards);
@@ -56,9 +57,11 @@ void	game_loop(Game *game)
 				place_piece_on_board(position_number, &(game->bitboards[game->current_player]));
 				
 				if (check_win(game->bitboards[game->current_player]))
-				{
-					game->game_over = 1;
+				{		
+					get_pieces_from_board(game->board_pieces, game->player_pieces, game->bitboards);
+					pretty_print_board(game->board_pieces);
 					printf("\n Player %d Won!\n", game->current_player + 1);
+					game->game_over = 1;
 				}
 
 				game->current_player ^= 1;
@@ -100,7 +103,7 @@ void	reset_game(Game *game)
 
 int	ask_to_play_again(void)
 {
-	printf("Do you want to play again? [Y/N]");
+	printf("\nDo you want to play again? [Y/N]: \n");
 
 	return (0);
 }
