@@ -19,3 +19,8 @@ int	check_win_diag_left(BITBOARD bitboard)
 {
 	return (bitboard & 0);
 }
+
+int	check_win(BITBOARD bitboard)
+{
+	return (bitboard & 0);
+}

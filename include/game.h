@@ -12,5 +12,7 @@ typedef struct game {
 Game	*new_game(void);
 void	start_game(Game *game);
 void	end_game(Game *game);
+void	reset_game(Game *game);
+int	ask_to_play_again(void);
 
 #endif

@@ -17,5 +17,4 @@ char 	*get_pieces_from_board(char *board_pieces, char *player_pieces, BITBOARD *
 
 int	valid_piece_placement(int positions_number, BITBOARD *bitboard);
 
-unsigned int	board_is_full(BITBOARD *bitboards);
 #endif

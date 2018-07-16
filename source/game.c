@@ -31,6 +31,7 @@ Game	*new_game(void)
 
 void	game_loop(Game *game)
 {
+	int moves = 0;
 	int position_number;	
 
 	while (!game->game_over)
@@ -38,25 +39,43 @@ void	game_loop(Game *game)
 		get_pieces_from_board(game->board_pieces, game->player_pieces, game->bitboards);
 		pretty_print_board(game->board_pieces);
 
-		printf("\nPlayer %d: Enter Position Number: ", game->current_player + 1);
-		scanf("%d", &position_number);
-
-
-		if (valid_piece_placement(position_number, game->bitboards))
+		if (moves >= 9)
 		{
-			place_piece_on_board(position_number, &(game->bitboards[game->current_player]));
-			game->current_player ^= 1;
+			game->game_over = 1;
+			printf("\n Board Full: Scratch! \n");
 		}
 		else
 		{
-			printf("\n Invalid Move: Try Again \n");
-		}
+			printf("\nPlayer %d: Enter Position Number: ", game->current_player + 1);
+			scanf("%d", &position_number);
+			moves++;
 
-		if (board_is_full(game->bitboards))
-		{
-			game->game_over = 1;
-		}
 
+			if (valid_piece_placement(position_number, game->bitboards))
+			{
+				place_piece_on_board(position_number, &(game->bitboards[game->current_player]));
+				
+				if (check_win(game->bitboards[game->current_player]))
+				{
+					game->game_over = 1;
+					printf("\n Player %d Won!\n", game->current_player + 1);
+				}
+
+				game->current_player ^= 1;
+			}
+			else
+			{
+				moves--;
+				printf("\n Invalid Move: Try Again \n");
+			}
+		}
+	
+	}
+
+	if (ask_to_play_again())
+	{
+		reset_game(game);
+		start_game(game);		
 	}
 }
 
@@ -71,4 +90,17 @@ void	end_game(Game *game)
 	free(game->player_pieces);
 	free(game->bitboards);
 	free(game);
+}
+
+void	reset_game(Game *game)
+{
+	game->bitboards[0] = 0;
+	game->bitboards[1] = 0;
+}
+
+int	ask_to_play_again(void)
+{
+	printf("Do you want to play again? [Y/N]");
+
+	return (0);
 }

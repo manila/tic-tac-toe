@@ -61,12 +61,3 @@ int	valid_piece_placement(int position_number, BITBOARD *bitboard)
 		return (0);
 	}
 }
-
-unsigned int	board_is_full(BITBOARD *bitboards)
-{
-	BITBOARD combined_board;
-	
-	combined_board = (bitboards[0] & bitboards[1]);
-
-	return !(combined_board ^ (BITBOARD) 0x01FF);
-}
