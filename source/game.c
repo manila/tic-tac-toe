@@ -97,13 +97,28 @@ void	end_game(Game *game)
 
 void	reset_game(Game *game)
 {
+	game->game_over = 0;
+	strncpy(game->board_pieces, "123456789", 9);
 	game->bitboards[0] = 0;
 	game->bitboards[1] = 0;
 }
 
 int	ask_to_play_again(void)
 {
-	printf("\nDo you want to play again? [Y/N]: \n");
+	char play_again;
+
+	printf("\nDo you want to play again? [Y/N]: ");
+	scanf("Hello%c", &play_again);
+
+	if (play_again > 97)
+	{
+		play_again -= 32;
+	} 
+	
+	if (play_again == 'y')
+	{
+		return (1);
+	}
 
 	return (0);
 }
